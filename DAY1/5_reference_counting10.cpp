@@ -44,11 +44,11 @@ class AutoPtr
 {
 	T* obj;
 public:
-	AutoPtr(T* p = nullptr) : obj(p) {}
+	AutoPtr(T* p = nullptr) : obj(p) { if (obj != nullptr) obj->AddRef(); }
 
-	AutoPtr(const AutoPtr& other) : obj(other.obj) {}
+	AutoPtr(const AutoPtr& other) : obj(other.obj) { if (obj != nullptr) obj->AddRef(); }
 
-	~AutoPtr() {} 
+	~AutoPtr() { if (obj != nullptr) obj->Release(); }
 
 	// 스마트 포인터의 핵심 : -> 와 *
 	T* operator->() { return obj; }
@@ -57,10 +57,17 @@ public:
 	// 복사 생성자, move 생성자, ->와 * 의 const 버전, 
 	// 템플릿 생성자가 필요합니다. - unique_ptr 만들때 설명
 };
+// webkit 소스에 "AutoPtr.h" 파일 있습니다.
 
+int main()
+{
+	AutoPtr<Truck> p1 = new Truck;
+	AutoPtr<Truck> p2 = p1;
 
+// 	p1->멤버 함수(); // p1은 포인터 처럼사용가능
+}
 
-
+/*
 int main()
 {
 	Truck* p1 = new Truck;
@@ -76,3 +83,4 @@ int main()
 
 
 
+*/
