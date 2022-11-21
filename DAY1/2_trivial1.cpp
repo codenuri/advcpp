@@ -11,11 +11,22 @@ class A
 {
 };
 
-class B
+class B //: public A
 {
+//	A a;
 public:
-	virtual void foo() {}
+//	virtual void foo() {}
 };
+// 생성자의 trivial 조건
+// 1. 가상함수가 없고
+// 2. 기반 클래스가 없거나 기반 클래스의 생성자가 trivial 하고
+// 3. 객체형 멤버가 없거나 객체형 멤버의 생성자가 trivial 하고
+// 4. 사용자가 만든 생성자가 없을때
+
+// 생성자는 "trivial" 합니다.
+
+
+
 int main()
 {
 	B* p = (B*)malloc(sizeof(B)); // malloc 은 생성자 호출 안됨
