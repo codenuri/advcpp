@@ -19,7 +19,8 @@ public:
 	Stream(Buffer& buf) { buf.useBuffer(); }
 };
 //===========================================
-
+// 핵심 1. 멤버 데이타를 기반 클래스 생성자에 보내면 안됩니다.
+//        => 초기화되지 않은 데이타를 기반 클래스 생성자가 사용하게 됩니다.
 class PipeStream : public Stream
 {
 	Buffer buff{ 1024 };
