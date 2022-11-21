@@ -38,6 +38,29 @@ public:
 	~Truck() { std::cout << "~Truck" << std::endl; }
 };
 
+// 참조계수용 함수를 자동으로 호출하는 스마트 포인터를 만들어 봅시다.
+template<typename T>
+class AutoPtr
+{
+	T* obj;
+public:
+	AutoPtr(T* p = nullptr) : obj(p) {}
+
+	AutoPtr(const AutoPtr& other) : obj(other.obj) {}
+
+	~AutoPtr() {} 
+
+	// 스마트 포인터의 핵심 : -> 와 *
+	T* operator->() { return obj; }
+	T& operator*() { return *obj; }
+
+	// 복사 생성자, move 생성자, ->와 * 의 const 버전, 
+	// 템플릿 생성자가 필요합니다. - unique_ptr 만들때 설명
+};
+
+
+
+
 int main()
 {
 	Truck* p1 = new Truck;
