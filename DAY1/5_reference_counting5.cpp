@@ -1,7 +1,15 @@
 #include <iostream>
 #include <vector>
 
-// 참조계수 기능을 제공하는 기반 클래스
+// CRTP 기술
+// => Curiously Recurring Template Pattern 
+// => 기반 클래스가 템플릿 인데, 템플릿 인자로 파생 클래스이름을 전달
+//    하는 기술
+// => CRTP 는 아주 다양한 활용이 가능한데..
+// => 아래 코드는 가상 소멸자를 사용하지 않기 위해서 사용
+
+
+
 
 template<typename T>
 class RefCount
