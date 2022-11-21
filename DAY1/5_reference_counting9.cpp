@@ -38,36 +38,38 @@ public:
 											// d.operator()() 사용	
 
 			d(static_cast<T*>(const_cast<RefCount*>(this))); // ok
-
-
 		}
 	}
-
 protected:
 	~RefCount() { }
 };
-
 
 class Truck : public RefCount< Truck  >
 {
 public:
 	~Truck() { std::cout << "~Truck" << std::endl; }
 };
-class Car : public RefCount< Car  >
+
+// Car 타입의 삭제방법은 변경
+struct Freer
+{
+	void operator()(void* p) const noexcept
+	{
+		std::cout << "free" << std::endl;
+		free(p);
+	}
+};
+
+class Car : public RefCount< Car, Freer  >
 {
 };
 
-
-
-
-
 int main()
 {
-	const Truck* p = new Truck();
-
+	Car* p = static_cast<Car*>(malloc(sizeof(Car)));
+	new(p) Car; // 생성자 호출해야 refCount 가 초기화 됩니다.
 	p->AddRef();
 	p->Release();
-
 }
 
 
