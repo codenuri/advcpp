@@ -30,8 +30,11 @@ struct TRIVIAL_SL
 
 	TRIVIAL_SL() = default;
 };
-
 // C++11 이후의 POD = standard layout && trivial 일때 POD 입니다.
+
+// 가상함수 가 있으면
+// 1. trivial 도 아니고
+// 2. standard layout 도 아닙니다.
 
 int main()
 {
