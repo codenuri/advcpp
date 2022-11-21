@@ -27,6 +27,16 @@ public:
 	PipeStream() : Stream(buff) {}
 };
 
+// 위 코드는 결국 아래 코드와 같습니다.
+/*
+class PipeStream : public Stream
+{
+	Buffer buff;
+public:
+	PipeStream() : Stream(buff), buff{ 1024 } {}
+};
+*/
+
 int main()
 {
 	PipeStream ps;
