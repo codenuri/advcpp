@@ -14,10 +14,22 @@ class RefCount
 public:
 	void AddRef() const { ++refCount; }
 
-	void Release() const 
+//	void Release()			// void Release(RefCount* this)
+	void Release() const	// void Release(const RefCount* this)
 	{
+		// 멤버데이타 = 10; // error
+
 		if (--refCount == 0)
-			delete static_cast<T*>(this);
+//			delete static_cast<T*>(this);
+					// const RefCount* => Truck* 로 변경시도. error
+
+//			delete static_cast<T*>(const_cast<RefCount*>(this) );
+					// const RefCount* => RefCount* 로 변경후
+					// RefCount* => Truck* 로 변경.. 
+
+			delete static_cast<const T*>(this);
+					// const RefCount* => const Truck*.. ok.. 
+
 	}
 protected:
 	~RefCount() { std::cout << "~RefCount" << std::endl; }
