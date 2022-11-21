@@ -2,7 +2,8 @@
 
 // 해결책 1. 생성자에서는 예외 가능성이 있는 작업을 하지 말라!!
 //         => 생성자는 "noexcept" 로 만들어라!
-
+// 
+//		   => "Two Phase Constructor" 라고 알려진 기술입니다.
 
 struct Resource
 {
