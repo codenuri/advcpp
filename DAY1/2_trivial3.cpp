@@ -6,6 +6,8 @@ struct Point
 
 	Point() = default;
 	Point(int a, int b) : x(a), y(b) {}
+
+//	Point(const Point& pt) : x(pt.x), y(pt.y) {}
 };
 
 template<typename T>
@@ -26,7 +28,6 @@ void copy(T* dst, T* src, std::size_t sz)
 		}
 	}
 }
-
 int main()
 {
 	Point pt1[5] = { {1,1}, {2,2}, {3,3}, {4,4}, {5,5} };
