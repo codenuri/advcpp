@@ -26,10 +26,20 @@ public:
 	{
 		if (--refCount == 0)
 		{
-			//	delete static_cast<const T*>(this);
+			// delete 를 직접 사용시
+			// "T*, const T*" 모두 사용가능합니다.
+			// 
+			// delete static_cast<const T*>(this); // ok
+
+			// 그런데, C++ 표준의 삭제자 객체인 "default_delete"를
+			// () 연산자의 인자로 non const 포인터만 가능합니다.
 			D d;
-			d(static_cast<const T*>(this)); // 삭제자 타입의 ()연산자호출
-								// d.operator()() 사용
+//			d(static_cast<const T*>(this)); // 삭제자 타입의 ()연산자호출
+											// d.operator()() 사용	
+
+			d(static_cast<T*>(const_cast<RefCount*>(this))); // ok
+
+
 		}
 	}
 
