@@ -10,10 +10,16 @@ struct Point
 //	Point(const Point& pt) : x(pt.x), y(pt.y) {}
 };
 
+// if : 조건에 따라 "실행" 여부를 판단
+// if constexpr : 조건에 따라 생성되는 함수에 코드를 포함할지를 판단. 
+
 template<typename T>
 void copy(T* dst, T* src, std::size_t sz)
 {
-	if (std::is_trivially_copyable_v<T>)
+//	if (std::is_trivially_copyable_v<T>)
+//	if (std::is_trivially_copy_constructible_v<T>)
+
+	if constexpr (std::is_trivially_copyable_v<T>)
 	{
 		std::cout << "using memcpy" << std::endl;
 		memcpy(dst, src, sizeof(T) * sz);
