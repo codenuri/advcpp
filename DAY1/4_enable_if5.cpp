@@ -10,6 +10,8 @@
 //				=> 함수 생성만 안함.
 //				=> 따라서, gcd(double, double) 버전 사용가능
 
+// static_assert		    : 조건을 만족하지 않으면 에러
+// enable_if로 반환타입 표기 : 조건을 만족하지 않으면 사용하지 않겠다.!
 
 template<typename T> 
 typename std::enable_if< std::is_integral_v<T>, T>::type 
