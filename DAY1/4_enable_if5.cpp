@@ -3,8 +3,8 @@
 
 // 아래 리턴 타입을 잘 생각해 보세요
 
-// std::enable_if<조건, void>::type 이 최종 결과는
-// 조건이 참일때   : void
+// std::enable_if<조건, T>::type 이 최종 결과는
+// 조건이 참일때   : T
 // 조건이 거짓일때 : error. "::type" 이 없다.
 //				=> SFINAE 에 따라서 "::type" 이 없어도 에러가 아니라
 //				=> 함수 생성만 안함.
@@ -12,7 +12,7 @@
 
 
 template<typename T> 
-typename std::enable_if< std::is_integral_v<T>, void>::type 
+typename std::enable_if< std::is_integral_v<T>, T>::type 
 gcd(T a, T b)
 {
 	return 0;
