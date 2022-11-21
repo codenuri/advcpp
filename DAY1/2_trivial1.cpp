@@ -18,5 +18,8 @@ public:
 };
 int main()
 {
+	B* p = (B*)malloc(sizeof(B)); // malloc 은 생성자 호출 안됨
 
+	// 생성자 호출없이 객체 사용
+	p->foo();
 }
