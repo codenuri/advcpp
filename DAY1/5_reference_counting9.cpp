@@ -15,13 +15,22 @@ protected:
 	~RefCountBase() {}
 };
 
-template<typename T> class RefCount : public RefCountBase
+// 객체를 삭제하는 방법을 변경할수 있도록
+// std::default_delete<T> : C++ 표준의 메모리 삭제자 함수 객체
+//							내부적으로 () 연산자에서 "delete" 수행
+template<typename T, typename D = std::default_delete<T> > 
+class RefCount : public RefCountBase
 {
 public:
 	void Release() const
 	{
 		if (--refCount == 0)
-			delete static_cast<const T*>(this);
+		{
+			//	delete static_cast<const T*>(this);
+			D d;
+			d(static_cast<const T*>(this)); // 삭제자 타입의 ()연산자호출
+								// d.operator()() 사용
+		}
 	}
 
 protected:
