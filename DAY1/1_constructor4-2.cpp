@@ -6,6 +6,9 @@
 //	=> RAII 로 자원을 관리하라!!
 //  => 소멸자를 만들지 말라!
 //  => "effective-C++" 책의 격언!
+// 
+//  => 아래 코드에서 "Test() 의 소멸자"는 호출되지 않아도
+//     shared_ptr p 의 소멸자는 호출됨을 보장 합니다.
 
 struct Resource
 {
@@ -17,6 +20,7 @@ class Test
 {
 //	Resource* p;
 	std::shared_ptr<Resource> p;
+
 public:
 	Test() : p(new Resource)
 	{
