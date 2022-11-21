@@ -11,12 +11,9 @@ struct Point
 };
 
 template<typename T>
-
 std::enable_if_t< std::is_trivially_copyable_v<T> > 
-
 copy(T* dst, T* src, std::size_t sz)
 {
-
 	std::cout << "using memcpy" << std::endl;
 	memcpy(dst, src, sizeof(T) * sz);
 }
