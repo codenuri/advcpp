@@ -22,6 +22,19 @@ int main()
 	//        구하고 싶다.
 	auto ret2 = mymax(s1.size(), s2.size());
 	
-	std::cout << ret2 << std::endl;  // ??
+	std::cout << ret2 << std::endl;  // 5 입니다.
+									// "AAAAA" 가 나오게 할수 없을까요?
+
+
+	// 핵심 2. 비교의 기준을 변경 가능하게 싶습니다.
+	// 다음중 좋은 방법을 선택해 보세요
+
+	// 방법1. 이항 조건자 - C++98 시절의 STL 스타일
+	mymax(s1, s2,
+		[](std::string& a, std::string& b) { return a.size() < b.size(); });
+
+
+	// 방법 2. 단항 조건자 사용 - Python 스타일
+	mymax(s1, s2, [](std::string& s) { return a.size(); } );
 
 }
