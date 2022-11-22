@@ -1,5 +1,9 @@
 #include <type_traits>
 
+// 핵심. 7번과 7-1 번의 에러 메세지를 비교해 보세요
+// => enable_if 를 사용한 덕분에 진단 메세지를 보다 편리하고 명확하게
+//    나타낼수 있습니다.
+
 template<typename T>
 class Complex
 {
