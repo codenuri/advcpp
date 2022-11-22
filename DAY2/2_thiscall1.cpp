@@ -41,5 +41,14 @@ int main()
 					// call Point::set()
 }
 
+// 파이썬.. 
+/*
+class Car :					// class Car
+	def Go(self) :			// {
+		...					//		void Go() {} // => Go(Car* this)로 변경
+
+c = Car()
+c.Go()	// 호출시 Go(c) 가 됩니다.
+*/
 
 
