@@ -28,6 +28,10 @@ int main()
 	cout << &main << "\n"; // cout.operator<<(void*)
 
 	cout << &Dialog::foo << "\n"; // cout.operator<<( bool ) 을 호출하게 됩니다.
+	
+//	void* p = reinterpret_cast<void*>(&Dialog::foo);
+//	int* p1 = reinterpret_cast<int*>(&Dialog::foo);
+//	printf("%d\n", p1[1]);
 }
 
 
