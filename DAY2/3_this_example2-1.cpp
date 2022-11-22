@@ -10,7 +10,17 @@ class Clock
 public:
 	Clock(const std::string& s) : name(s) {}
 
-	void Start(int ms) {}
+	void Start(int ms) 
+	{
+		int id = ec_set_timer(ms, Handler);
+	}
+	// 1. C언어에서 사용하는 "Callback 함수" 를 객체지향으로 설계할때는
+	//    반드시 static 멤버 함수 이어야 합니다.
+	static void Handler(int id )
+	{
+//		std::cout << name << std::endl; // error. "this->name" 이 되어야 하는데
+										// this가 없습니다.
+	}
 };
 
 int main()
