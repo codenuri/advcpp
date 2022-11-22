@@ -3,13 +3,10 @@
 #include <map>
 #include <string>
 
-class Clock;
-
-std::map<int, Clock*> this_map; // this 를 보관하는 자료 구조!
-
-
 class Clock
 {
+	static std::map<int, Clock*> this_map; // this 를 보관하는 자료 구조!
+
 	std::string name;
 public:
 	Clock(const std::string& s) : name(s) {}
@@ -30,7 +27,7 @@ public:
 		std::cout << self->name << std::endl; // 
 	}
 };
-
+std::map<int, Clock*> Clock::this_map;
 
 
 int main()
