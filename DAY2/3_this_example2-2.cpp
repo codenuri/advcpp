@@ -40,3 +40,12 @@ int main()
 
 	ec_process_message();
 }
+
+// static 멤버함수로 callback 전달시
+// this 를 사용하는 대표적 기술
+
+// 1. callback 함수 인자로 전달
+//   => Thread 예제 참고
+
+// 2. this 를 자료구조(map) 에 보관
+//  => Clock 예제
