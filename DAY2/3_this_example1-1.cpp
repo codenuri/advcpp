@@ -13,6 +13,9 @@ public:
 	//	=> CreateThread()의 3번째 인자는 "일반함수 포인터"로 되어 있으므로
 	//    "멤버 함수" 가 아닌 "static 멤버 함수" 이어야 합니다.
 
+	// 핵심 2. static 멤버 함수에서 멤버 데이타에 접근하기 위해
+	//		this 를 전달하는 기술을 "꼭 기억" 하세요!!
+
 	static DWORD __stdcall threadMain(void* p)
 	{
 //		threadLoop();	// error. 멤버 함수 이므로
