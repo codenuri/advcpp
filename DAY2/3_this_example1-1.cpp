@@ -1,27 +1,23 @@
 #include <iostream>
 #include <Windows.h>
 
-DWORD __stdcall foo(void* p)
-{
-	std::cout << "foo" << std::endl;
-	return 0;
-}
-
-int main()
-{
-	CreateThread(0, 0, foo, "A", 0, 0);
-	getchar();
-}
 //===========================================
 // C언어의 스레드 개념을 C++ 클래스로 설계해 봅시다.
 // 아래 클래스를 라이브러리 내부 클래스라고 가정합니다.
 class Thread
 {
 public:
-	void run() {}
+	void run() { CreateThread(0, 0, threadMain, 0, 0, 0); }
 
+	DWORD __stdcall threadMain(void* p)
+	{
+		threadLoop();
+		return 0;
+	}
 	virtual void threadLoop() {}
 };
+
+
 // 아래 클래스는 라이브러리 사용자 클래스입니다.
 class MyThread : public Thread
 {
