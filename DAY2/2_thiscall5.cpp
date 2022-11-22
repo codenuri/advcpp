@@ -50,7 +50,11 @@ int main()
 	// => 가상상속사용시 일부 컴파일러는 12바이트
 	
 	// 그래서 void* 에 멤버 함수 포인터를 담을수 없습니다.
-	void* p = &Obj::fa; // error
+//	void* p = &Obj::fa; // error
+
+
+	// cout 으로 멤버 함수의 주소를 출력하지 마세요 - 잘못 동작합니다.
+	std::cout << &C::fa << std::endl;
 
 }
 
