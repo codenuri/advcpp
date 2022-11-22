@@ -23,9 +23,14 @@ int main()
 	std::cout << &obj << std::endl; // 1000 번지 일때 아래 3줄 예측하세요
 
 	// 아래 3줄의 결과로  출력되는 주소 예측해 보세요
-	obj.fa();	// ?
-	obj.fb();	// ?
-	obj.fc();	// ?
+	obj.fa();	// fa  1000
+				// => fa(&obj)   ok!!
+
+	obj.fb();	// fb  1004
+				// => fb(&obj) ??? 처럼되면 안된다!!
+				// => fb(&obj + sizeof(A));
+
+	obj.fc();	// fc  1000
 
 }
 
