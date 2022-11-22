@@ -5,8 +5,11 @@ class Complex
 public:
 	Complex(const T& r, const T& i) : real(r), image(i) {}
 
+	// 아래 코드는 "템플릿 => C++ 코드 생성자" 를 생성한 후에
+	// "real(c.real)" <== 이 부분 컴파일시에 에러 입니다.
 	template<typename U>
-	Complex(const Complex<U>& c) : real(c.real), image(c.image) {}
+	Complex(const Complex<U>& c) 
+		: real(c.real), image(c.image) {}
 
 	template<typename> friend class Complex;
 };
