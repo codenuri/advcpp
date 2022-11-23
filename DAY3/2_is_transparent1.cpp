@@ -26,7 +26,16 @@ struct PeopleCompare
 	bool operator()(const std::string& name, const People& p) const
 	{
 		return name < p.name;
-	}
+	}	
+
+	// 핵심 - C++14 기술
+	// => 함수객체를 만들때 되도록이면 "is_transparent" 를 넣자!
+	// => 타입을 아무것이나 상관없다.
+	// => 함수객체 안에 "is_transparent" 라는 타입이 "있는가 없는가"가 중요
+	using is_transparent = int; // typedef int is_transparent;
+
+	// 아래 처럼 해도 됩니다.
+//	struct is_transparent {};
 };
 
 
@@ -50,11 +59,32 @@ int main()
 	// 방법 1. People 을 보관하고 있으므로 "People" 객체를 전달해서 검색
 	auto ret1 = s.find( People("bbb",30) ); // ok
 
+
 	// 방법 2. 현재 2개 People 에 대한 비교는 "name" 항목만 사용한다.
 	// "이름" 만으로 검색할수 없을까 ?
 	auto ret2 = s.find("bbb"); // ??!!!
 
+
 	// "방법 2" 가 되도록 하려면
 	// 1. 비교 함수 객체가 "People객체, std::string" 을 비교 가능해야 합니다.
-	// 2. 
+	// 2. 비교 함수 객체 안에 "using is_transparent = 타입"이 있으면됩니다.
+	//    => "타입" 은 아무거나 적으세요.
 }
+// People 멤버 변수 중에 name 외에 string 변수가 더 있는 경우에도
+// s.find("aaa") 처럼 사용할 수 있나요?
+// => PeopleCompare 안에서 "People, string" 을 비교할때 name 항목과 비교합니다.
+
+// 원리
+// => PeopleCompare 자체는 "People, string" 비교가 가능한 상태 입니다.
+// => 그런데, set 을 만들때 아래 처럼 했습니다.
+
+template<typename T, typename Pr>
+class set
+{
+	Pr pr;  // 현재 pr 은 PeopleCompare 입니다.
+public:
+	iterator find(const T& p) // 이렇게 하면 
+	{
+	}
+};
+set<People, PeopleCompare> s;
