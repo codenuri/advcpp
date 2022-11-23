@@ -10,6 +10,12 @@ template<typename T> struct iterator_traits
 	using iterator_category = typename T::iterator_category;
 };
 
+// T= raw pointer 일때 구현을 변경합니다.
+template<typename T> struct iterator_traits<T*>
+{
+	using iterator_category = std::random_access_iterator_tag;
+};
+
 
 
 
