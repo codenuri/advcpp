@@ -21,6 +21,9 @@ struct less<void>
     {
         return std::forward<T1>(lhs) < std::forward<T2>(rhs);
     }
+
+    // C++14 이후의 대부분의 C++ 표준 함수객체 클래스안에는 아래 코드가 있습니다.
+    using is_transparent = int;
 };
 
 
