@@ -83,8 +83,25 @@ class set
 {
 	Pr pr;  // 현재 pr 은 PeopleCompare 입니다.
 public:
-	iterator find(const T& p) // 이렇게 하면 
+	iterator find(const T& p) // 이렇게 하면 "People" 만 가능합니다.
 	{
+		if (pr(root요소, p)) // 비교함수로 검색 시작
+		{
+			// 결과에 따라 왼쪽 오른쪽으로 이동
+		}
+	}
+	// 비교 함수 객체(PR) 에 is_transparent 가 있을때만 사용하겠다는의미
+	// is_transparent가 없으면 아래 함수 템플릿을 사용되지 않습니다.
+	// SFINAE
+	template<typename K,
+			 typename X = Pr::is_transparent> 
+	iterator find(const K& p)  // 이렇게 하면 임의의 타입을 받을수 있습니다
+	{
+		if (pr(root요소, p)) // 비교함수로 검색 시작
+		{
+			// 결과에 따라 왼쪽 오른쪽으로 이동
+		}
 	}
 };
 set<People, PeopleCompare> s;
+s.find("문자열전달");
