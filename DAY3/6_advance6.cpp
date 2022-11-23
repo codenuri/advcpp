@@ -40,6 +40,9 @@ void xadvance(std::input_iterator auto& p, int sz)
 	while (sz--) ++p;
 }
 
+// C++ 창시자가 최초에 만든 C++버전의 이름 : "C front" 였습니다.
+// 새로운 C++ 만들자... 이름은            : "C++ front" 라고 하자
+// youtube CPPCon 에서 "10x faster & safer"
 
 int main()
 {
