@@ -20,11 +20,22 @@ bool operator<(const std::string& name, const People& p2) {	return name < p2.nam
 // "People 객체 < 문자열(이름)"
 // "문자열(이름) < People 객체"
 
-
 int main()
 {
-	std::set<People> s;	// std::set<People, std::less<People>> 
+	People p1("aaa", 10);
+	People p2("bbb", 10);
 
+	std::less<People> f1;
+	f1(p1, p2);		// ok
+//	f1(p1, "aaa");	// error  people 자체는 p1 < "aaa" 의 능력이 있지만
+					// less<People> 의 () 연산자는 같은 타입만 받을수 있다.
+
+
+//	std::set<People> s;	// std::set<typename Key, typename Pr = less<Key>>
+						// std::set<People, std::less<People>> 
+						// 즉, 비교 객체가 less<People> 인데..!!!
+						// less<People> 은 "People" 만 비교 가능합니다.
+	std::set<People, std::less<void>  > s;
 
 	s.emplace("ddd", 20);
 	s.emplace("bbb", 30);
