@@ -8,7 +8,10 @@
 template<typename T>
 void xadvance(T& p, int sz)
 {
-	if ( std::is_same_v<
+	// if constexpr : 조건이 거짓이면 "템플릿 인스턴스화"에 포함하지말라는 것
+	// 템플릿 인스턴스화 : "템플릿 => 실제 함수"를 만드는 과정
+
+	if constexpr ( std::is_same_v<
 					typename  std::iterator_traits<T>::iterator_category,
 					std::random_access_iterator_tag> )
 	{
@@ -22,9 +25,10 @@ void xadvance(T& p, int sz)
 	}
 }
 
+
 int main()
 {
-	//std::vector<int> s = { 1,2,3,4,5,6,7,8,9,10 };
+//	std::vector<int> s = { 1,2,3,4,5,6,7,8,9,10 };
 	std::list<int>   s = { 1,2,3,4,5,6,7,8,9,10 };
 	auto p = s.begin();
 
