@@ -21,7 +21,9 @@ concept random_access_iterator = requires(T& p)
 	--p;
 	p--;
 	p + 1;
+	*p;
 };
+
 template<typename T> void check(T& p)
 {
 	// bool b = 컨셉이름<타입>; // 타입이 컨셉을 만족하는지 조사
