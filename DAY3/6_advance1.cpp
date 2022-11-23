@@ -36,25 +36,26 @@ void xadvance_imp(T& p, int sz, std::random_access_iterator_tag )
 	std::cout << "+ 로 이동" << std::endl;
 	p = p + sz;
 }
-
 template<typename T>
 void xadvance_imp(T& p, int sz, std::input_iterator_tag)
 {
 	std::cout << "++ 로 이동" << std::endl;
 	while (sz--) ++p;
 }
-
 template<typename T> 
 void xadvance(T& p, int sz)
 {
 	// 반복자의 종류에 따라 함수 오버로딩합니다.
+	// => 결국 반복자 안에 "자신이 어떤 종류인지를 나타내는 타입(값이아닌)을 넣고!
+	// => 함수 오버로딩 기술로 다른 구현을 사용
 	xadvance_imp(p, sz, typename T::iterator_category() );
 }
 
+
 int main()
 {
-	//	std::vector<int> s = { 1,2,3,4,5,6,7,8,9,10 };
-	std::list<int>   s = { 1,2,3,4,5,6,7,8,9,10 };
+	std::vector<int> s = { 1,2,3,4,5,6,7,8,9,10 };
+	//std::list<int>   s = { 1,2,3,4,5,6,7,8,9,10 };
 
 	auto p = s.begin();
 
