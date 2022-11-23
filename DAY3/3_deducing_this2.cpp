@@ -6,8 +6,8 @@ class Vector
 public:
 	// [] 연산자 재정의 - 객체를 배열 처럼 사용가능하게 할때 만들게 됩니다.
 	// => 이 함수를 만들때는 아래 처럼 항상 2개 버전을 제공하게 됩니다.
-	int& operator[](int idx) { return buff[idx]; }
-	const int& operator[](int idx) const { return buff[idx]; }
+//	int& operator[](int idx) { return buff[idx]; }
+//	const int& operator[](int idx) const { return buff[idx]; }
 
 	// 이외에도 .begin(), .end() 같은 함수도 항상 "상수함수", "비상수함수"
 	// 버전을 2개 만들어야 합니다.
@@ -16,7 +16,7 @@ public:
 	template<typename T>
 	decltype(auto) operator[](this T&& self, int idx)
 	{
-		return buff[idx];
+		return self.buff[idx];
 	}
 };
 
@@ -35,6 +35,6 @@ int main()
 
 
 					// C++23 이전					// c++23
-	int n1 = v1[0]; // operator[](0) 호출			// operator[](v1)
-	int n2 = v2[0]; // operator[](0) const 호출		// operator[](v2)
+	int n3 = v1[0]; // operator[](0) 호출			// operator[](v1)
+	int n4 = v2[0]; // operator[](0) const 호출		// operator[](v2)
 }
