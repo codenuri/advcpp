@@ -9,6 +9,7 @@
 // std::random_access_iterator_tag : empty class,C++98 에서 만든것
 // std::random_access_iterator     : concept, C++20 에서 만든것
 
+/*
 template< std::random_access_iterator T>
 void xadvance(T& p, int sz)
 {
@@ -18,6 +19,22 @@ void xadvance(T& p, int sz)
 
 template< std::input_iterator T>
 void xadvance(T& p, int sz)
+{
+	std::cout << "++ 로 이동" << std::endl;
+	while (sz--) ++p;
+}
+*/
+
+// 아래 코드도 결국 위와 동일합니다.
+// => 미래에는 아래처럼 만들게 됩니다.
+// => template 표기가 없지만 아래 코드는 "template" 입니다.
+void xadvance(std::random_access_iterator auto& p, int sz)
+{
+	std::cout << "+ 로 이동" << std::endl;
+	p = p + sz;
+}
+
+void xadvance(std::input_iterator auto& p, int sz)
 {
 	std::cout << "++ 로 이동" << std::endl;
 	while (sz--) ++p;
