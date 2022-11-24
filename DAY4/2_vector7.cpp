@@ -93,6 +93,7 @@ public:
 	~vector(){	}
 
 	// Bit 단위로 관리하는 역활을 하는 Proxy 객체
+	// "temporary proxy" 라는 기술
 	class BitProxy
 	{
 		int* buff;
