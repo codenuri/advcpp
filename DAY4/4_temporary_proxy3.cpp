@@ -36,6 +36,8 @@ public:
 		{
 			printf("b1[0] 이 좌변에 있는 경우 - 복사본 만들어야 합니다.\n");
 
+			// 아래 코드에 추가로 "--(*refcount)"가 있어야 합니다.
+			
 			char* temp = new char[strlen(label.text) + 1];
 			strcpy_s(temp, strlen(label.text) + 1, label.text);
 
