@@ -23,7 +23,10 @@ int main()
 //	delete p1;
 
 
-	Point* p = operator new( sizeof(Point) );
+	// 1. 생성자 호출없이 메모리만 할당 ( malloc 와 유사 )
+	Point* p = static_cast<Point*>( operator new( sizeof(Point) ));
 
+
+	// 4. 소멸자 없이 메모리 해지( free 와 유사 )
 	operator delete(p);
 }
