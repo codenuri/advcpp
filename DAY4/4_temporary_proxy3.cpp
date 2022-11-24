@@ -32,7 +32,21 @@ public:
 			printf("b1[0] 이 우변에 있는 경우 - 복사본 만들필요 없다\n");
 			return label.text[idx];
 		}
+		CharProxy& operator=(char c)
+		{
+			printf("b1[0] 이 좌변에 있는 경우 - 복사본 만들어야 합니다.\n");
+
+			char* temp = new char[strlen(label.text) + 1];
+			strcpy_s(temp, strlen(label.text) + 1, label.text);
+
+			label.text = temp;
+			label.text[idx] = c;
+
+			return *this;
+		}
 	};
+
+	friend class CharProxy;
 
 	CharProxy operator[](int idx)
 	{
