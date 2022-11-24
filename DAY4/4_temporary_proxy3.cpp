@@ -22,10 +22,10 @@ public:
 	*/
 	class CharProxy
 	{
-		Lable& label;
+		Label& label;
 		int   idx;
 	public:
-		CharProxy(Lable& b , int n) : label(b), idx(n) {}
+		CharProxy(Label& b , int n) : label(b), idx(n) {}
 
 		operator char()
 		{
