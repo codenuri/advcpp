@@ -61,19 +61,46 @@ public:
 		capacity = 0;
 	}
 
-	void resize(std::size_t newsize)
+	void resize(std::size_t newsize, const T& value)
 	{
 		if (newsize > capacity)	
 		{
+//			T* temp = static_cast<T*>(operator new(sizeof(T) * newsize));
+			T* temp = ax.allocate(newsize);
 
+			for (int i = 0; i < size; i++)
+			{
+			//	temp[i] = buff[i];	// 생성자 호출이 아닌, 대입연산자 호출
+
+			//	new(&temp[i]) T;			// 디폴트 생성자
+			//	new(&temp[i]) T(buff[i]);	// 복사 생성자
+
+			//	new(&temp[i]) T(std::move(buff[i]));	// 이동 생성자
+
+			//	new(&temp[i]) T(std::move_if_noexcept(buff[i]));
+								// => move 생성자에 예외가 없다면 move 생성자사용
+								// => 예외 가능성이 있으면 복사 생성자 사용
+
+				std::allocator_traits<Alloc>::construct(ax,
+									&temp[i], std::move_if_noexcept(buff[i]) );
+			}
+			// 증가된 메모리 영역에도 생성자 호출
+			for (int i = size; i < newsize; i++)
+			{
+			//	new(&temp[i]) T;			// 디폴트 생성자
+			//	new(&temp[i]) T(buff[i]);	// 복사 생성자
+
+				std::allocator_traits<Alloc>::construct(ax,
+								&temp[i], value);
+			}
+			size = newsize;
+			capacity = newsize;
 		}
 	}
 };
-
-
 int main()
 {
 	vector<Point> v(3, Point(0, 0));
 
-	v.resize(5); // size 늘리기.
+	v.resize(5, Point(0,0)); // size 늘리기.
 }
