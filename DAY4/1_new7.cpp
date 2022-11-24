@@ -33,7 +33,7 @@ public:
 	// 규칙 2. 아래 3개의 멤버도 필요 합니다.(관례적인 코드)
 	using value_type = T;
 	debug_alloc() = default;
-	template<typename T> debug_alloc(const debug_alloc<U>& ) {}
+	template<typename U> debug_alloc(const debug_alloc<U>& ) {}
 };
 // 규칙 3. == 와 != 연산자 제공되어야 합니다.
 template<typename T> 
