@@ -3,6 +3,8 @@
 template<typename T> class MyAlloc
 {
 public:
+	using value_type = T;
+
 	// C++98 시절의 allocator 에는 반드시 rebind 가 있어야 했습니다.
 	/*
 	template<typename U> struct rebind
