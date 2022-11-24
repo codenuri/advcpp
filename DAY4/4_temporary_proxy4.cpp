@@ -24,7 +24,6 @@ int main()
 	
 	// bitset 은 반복자가 없습니다.
 	// for( auto e : b1) {} 안됩니다.!!
-
 }
 
 
