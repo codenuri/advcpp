@@ -5,9 +5,9 @@
 
 int main()
 {
-//	std::vector<int> v = { 1,2,3,4,5,6,7,8,9,10 };
+	std::vector<int> v = { 1,2,3,4,5,6,7,8,9,10 };
 
-	std::vector<int, debug_alloc<int> > v = { 1,2,3,4,5,6,7,8,9,10 };
+//	std::vector<int, debug_alloc<int> > v = { 1,2,3,4,5,6,7,8,9,10 };
 
 	// 1. remove 사용.  짝수만 제거
 	auto p = std::remove_if(v.begin(), v.end(), 
@@ -27,10 +27,16 @@ int main()
 	std::cout << v.capacity() << ", " << v.size() << std::endl; // 10, 0
 
 
-	// 4. shrink_to_fit()
+	// 4. shrink_to_fit() - C++11 입니다.
 	// => capacity 를 size 크기로 해달라!
 	// => 현재 size == 0 이므로 메모리 제거!
-	v.shrink_to_fit();
+	// v.shrink_to_fit();
+
+
+	// C++11 이전에 vector 메모리를 줄이는 대표적인 테크닉
+	
+	std::vector<int>().swap(v);	// effective STL 책에서 소개한 기술
+
 
 	std::cout << v.capacity() << ", " << v.size() << std::endl; // 0, 0
 }
