@@ -120,6 +120,8 @@ public:
 			}
 		}
 	}
+	// 도전 과제 : clear, shink_to_fit() 구현해보세요
+	//				소멸자호출 잊지 마세요..!
 };
 int main()
 {
