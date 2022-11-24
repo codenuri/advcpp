@@ -60,10 +60,26 @@ public:
 		size = 0;
 		capacity = 0;
 	}
+
+	void resize(std::size_t newsize)
+	{
+		if (newsize > capacity)	// 메모리가 부족할때!!!!
+		{
+			// 버퍼를 키우기위해 큰 버퍼를 할당할때
+			// 절대 아래 처럼 코딩하지 마세요.!!
+			// 단점 1. T 타입의 디폴트 생성자가 필요
+			// 단점 2. 메모리만 할당하면 되지 객체를 생성할필요없다.!
+			//         (생성자 호출할 필요 없다)
+			T* tmp = new T[5];
+
+		}
+	}
 };
 
 
 int main()
 {
-	vector<Point> v(10, Point(0, 0));
+	vector<Point> v(3, Point(0, 0));
+
+	v.resize(5); // size 늘리기.
 }
