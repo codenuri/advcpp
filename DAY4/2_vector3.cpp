@@ -96,6 +96,29 @@ public:
 			size = newsize;
 			capacity = newsize;
 		}
+		else
+		{
+			// 메모리 재할당이 필요 없을때
+			if (newsize > size)	// 크기가 증가할때
+			{
+				for (int i = size; i < newsize; i++)
+				{
+					// 생성자 호출
+					std::allocator_traits<Alloc>::construct(ax,
+						&buff[i], value);
+				}
+				size = newsize;
+			}
+			else if ( newsize < size) // 크기 감소
+			{
+				for (int i = size-1; i >= newsize; i--)
+				{
+					// 소멸자 호출
+					std::allocator_traits<Alloc>::destroy(ax, &buff[i]);
+				}
+				size = newsize;
+			}
+		}
 	}
 };
 int main()
