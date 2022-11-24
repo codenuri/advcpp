@@ -92,8 +92,6 @@ public:
 
 	~vector(){	}
 
-	void resize(std::size_t newsize, const T& value = T())	{	}
-
 	// Bit 단위로 관리하는 역활을 하는 Proxy 객체
 	class BitProxy
 	{
@@ -111,10 +109,18 @@ public:
 			
 			return *this;
 		}
+		// bool b = v[0] 처럼 사용할수 있게 하기위해
+		// BitProxy 를 bool 로 변환되게 합니다.
+		operator bool()
+		{
+			printf("BitProxy operator bool()\n");
+
+			// buff 메모리의 idx 번째 bit 가 0인지 1인지 조사해서 반환하세요
+			return true;
+		}
 	};
 	BitProxy operator[](int idx) { return BitProxy(buff, idx); }
 };
-
 int main()
 {
 	vector<bool> v1(100, 0);
@@ -122,5 +128,7 @@ int main()
 	v1[0] = true;	// v1.operator[](0) = true;
 					// BitProxy임시객체 = true;
 					// BitProxy.operator=(bool) 가 호출됩니다.
-	bool b = v1[0];
+
+	bool b = v1[0]; // bool b = BitProxy임시객체
+					// bool b = 임시객체.operator bool()
 }
