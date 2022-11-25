@@ -26,7 +26,7 @@ public:
     {
         if (pobj)
         {
-            Dx d;
+            Dx d;       // 디폴트 생성자가 있어야 이렇게 할수 있다.
             d(pobj);  
         }
     }
