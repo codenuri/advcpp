@@ -51,7 +51,7 @@ int main()
 					// => vector 의 생성자는explicit 입니다.
 
 	s.emplace_back(10); // ok.. vector<int> v(10) 의 의미 이므로
-
+						// vector<int> v(다른vector)
 
 	// 인자 한개인 생성자가 explicit 가 아닌경우 => 무조건 emplace_back  사용!!
 	// 인자 한개인 생성자가 explicit 인 경우     => 조심해서 emplace_back 사용하세요
