@@ -37,6 +37,12 @@ void operator delete[](void* p) noexcept
 
 int main()
 {
-    std::string s1("ABCD");
+    // SSO : small string optimization
+    //      => 작은 문자열을 힙할당을 하지 않는다는 의미.
+    //      => 대부분 "16" 글자를 기준으로 합니다
+    // 
+//    std::string s1("ABCD");
+
+  std::string s1("ABCDjsdljflsdjflsdjflsdlkds");
 
 }
