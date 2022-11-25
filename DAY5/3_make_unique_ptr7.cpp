@@ -38,10 +38,13 @@ public:
     unique_ptr(const unique_ptr&) = delete;
     unique_ptr& operator=(const unique_ptr&) = delete;
 
+    // unique_ptr&& => unique_ptr<T, Dx>&& 입니다.
+
     unique_ptr(unique_ptr&& other) noexcept : cp(std::move(other.cp))
     {
         other.cp.get_second() = nullptr;
     }
+
     unique_ptr& operator=(unique_ptr&& other) noexcept
     {
         if (&other == this) return *this;
@@ -51,6 +54,16 @@ public:
 
         return *this;
     }
+
+    // Dog* 가 Animal* 에 들어 갈수 있다면
+    // unique_ptr<Dog> 도 unique_ptr<Animal> 에 들어 갈수 잇어야 합니다.
+    template<typename U, typename Dx2>
+    unique_ptr(unique_ptr<U, Dx2>&& other) noexcept
+        : cp(one_and_var, other.cp.get_first(), other.cp.get_second())
+    {
+    }
+    // 서로의 멤버 데이타 접근을 위해서
+    template<typename, typename> friend class unique_ptr;
 };
 
 class Animal {};
@@ -61,5 +74,8 @@ int main()
     unique_ptr<Dog> up1(new Dog);
     unique_ptr<Animal> up2 = std::move(up1); // 되야 하나요 ?
                                             // 안되야 하나요 ?
+
+    Complex<float> c1(1, 2);
+    Complex<double> c2 = c1; // generic 생성자 필요!
 }
 
