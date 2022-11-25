@@ -33,6 +33,10 @@ int main()
 
 	take_view tv(v, 3); // v를 3개만 볼수 있는 view
 
+	// range 의 view 는 자원을 소유하지 않으므로
+	// 원본 컨테이너 변경시 view 의 결과도 당연히 변경됩니다
+	v[0] = 100; 
+
 	for (auto e : tv )
 	{
 		std::cout << e << std::endl;
