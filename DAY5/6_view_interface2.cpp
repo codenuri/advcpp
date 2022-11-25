@@ -13,6 +13,7 @@
 template<typename T>
 class reverse_view : public std::ranges::view_interface< reverse_view<T> >
 {
+//	ref_view<T> rng;
 	T rng;
 public:
 	reverse_view(T& r) : rng(r) {}
@@ -20,8 +21,10 @@ public:
 	auto begin() { return rng.rbegin(); }
 	auto end() { return rng.rend(); }
 };
+// class template 의 타입 추론을 위한 코드.
 template<typename T>
 reverse_view(T&&) -> reverse_view<std::views::all_t<T>>;
+
 
 template<typename T>
 class take_view : public std::ranges::view_interface< take_view<T> >
