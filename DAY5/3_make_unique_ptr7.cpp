@@ -75,7 +75,7 @@ int main()
     unique_ptr<Animal> up2 = std::move(up1); // 되야 하나요 ?
                                             // 안되야 하나요 ?
 
-    Complex<float> c1(1, 2);
-    Complex<double> c2 = c1; // generic 생성자 필요!
+//    Complex<float> c1(1, 2);
+//    Complex<double> c2 = c1; // generic 생성자 필요!
 }
 
