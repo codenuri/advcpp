@@ -95,7 +95,7 @@ public:
 template <typename T, typename Dx>
 class unique_ptr<T[], Dx>
 {
-    compressed_pair<Dx, T*> cp; //  <Dx, int[]*> 표기법은 에러 입니다.
+    compressed_pair<Dx, T*> cp; //  <Dx, int*> 입니다.
 
 public:
     inline explicit unique_ptr(T* p, const Dx& d = Dx())
@@ -109,7 +109,11 @@ public:
             cp.get_first()(cp.get_second());
         }
     }
-    inline T& operator*()  const { return *cp.get_second(); }
+    // 배열 버전은 * 대신 [] 를 지원 합니다.
+//  inline T& operator*()  const { return *cp.get_second(); }
+
+    inline T& operator[](int idx)  const { return cp.get_second()[idx]; }
+
     inline T* operator->() const { return cp.get_second(); }
 
     unique_ptr(const unique_ptr&) = delete;
@@ -151,5 +155,12 @@ int main()
 
     unique_ptr<int>   up1(new int);         // T=int
     unique_ptr<int[]> up2(new int[10]);     // T=int[]
+
+    *up1 = 10;      // ok
+//    up1[0] = 10;    // error
+
+//    *up2 = 10;      // error
+    up2[0] = 10;    // ok. 이렇게 사용할수 있으면 좋습니다.
+
 }
 
