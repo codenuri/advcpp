@@ -34,9 +34,30 @@ public:
     inline T& operator*()  const { return *pobj; }
     inline T* operator->() const { return pobj; }
 };
+
 int main()
 {
-    unique_ptr<Car> p1(new Car);
+    // 방법 1. 
+//  unique_ptr<int, [](int* p) { free(p); } >  p1((int*)malloc(20));
+            // error
+            // => 람다표현식의 결과는 임시객체 입니다.
+            // => 템플릿 인자로 타입을 보내야 하는데, 객체를 보내기 때문에
+
+
+    // 방법 2. C++20 부터 가능한 방법
+//  unique_ptr<int, decltype( [](int* p) { free(p); } ) > p1((int*)malloc(20));
+            // => error
+            // => 람다표현식은 decltype( ) 안에 넣을수 없다.!!
+            // => 단, C++20 부터는 넣을수 있습니다.
+
+    // 방법 3. 
+    auto del = [](int* p) { free(p); };
+
+    unique_ptr<int, decltype( del ) > p1((int*)malloc(20));
+            // => 이 코드에는 문제가 없다.
+            // => 그런데, 람다표현식이 만드는 타입은 디폴트 생성자가 없다
+            // => 그래서 unique_ptr 의 소멸자에서 에러!!
+            //      Dx d;   <<=== 디폴트 생성자 필요!!
 
 }
 
