@@ -7,6 +7,15 @@
 template<typename T>
 struct default_delete
 {
+    constexpr explicit default_delete() noexcept = default;
+
+    // Generic 생성자가 필요한 경우가 생각보다 많습니다.
+    // default_delete<Dog> 는 default_delete<Animal> 과 호환되지만
+    // default_delete<Dog> 는 default_delete<int> 는 호환되지 않습니다.
+    template<typename U,
+             typename = std::enable_if_t< std::is_convertible_v<U*, T*> >  >
+    default_delete(const default_delete<U>&) {}
+
     inline void operator()(T* obj) const noexcept
     {
         static_assert(sizeof(T) > 0,
@@ -61,6 +70,7 @@ public:
     unique_ptr(unique_ptr<U, Dx2>&& other) noexcept
         : cp(one_and_var, other.cp.get_first(), other.cp.get_second())
     {
+        other.cp.get_second() = nullptr;
     }
     // 서로의 멤버 데이타 접근을 위해서
     template<typename, typename> friend class unique_ptr;
@@ -74,6 +84,11 @@ int main()
     unique_ptr<Dog> up1(new Dog);
     unique_ptr<Animal> up2 = std::move(up1); // 되야 하나요 ?
                                             // 안되야 하나요 ?
+
+
+
+
+
 
 //    Complex<float> c1(1, 2);
 //    Complex<double> c2 = c1; // generic 생성자 필요!
